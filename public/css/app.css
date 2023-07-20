@@ -8,10 +8,6 @@
 #cluster-map:hover{
     border: 1px solid black;
 }
-
-.container{
-    margin-top: 5%;
-}
 #map{
     width: 100%;
     height: 300px;
