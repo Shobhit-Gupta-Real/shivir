@@ -1,0 +1,56 @@
+<% layout('layouts/Boilerplate') %>
+    <div class="row">
+        <h1 class="text-center">
+            Give New Specifications
+        </h1>
+        <div class="card p-3 mt-2 mb-3 shadow col-6 <%=camp.image.length === 0?'offset-3':''%>" >
+            <form action="/campgrounds/<%=camp._id%>?_method=PUT" method="post" id="main-form" novalidate class="validated-form"
+                enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title:</label><br>
+                    <input type="text" name="title" id="title" class="form-control" value="<%=camp.title%>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="locations" class="form-label">Locations:</label> <br>
+                    <input type="text" name="location" placeholder="city, state" id="locations" class="form-control"
+                        value="<%=camp.location%>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Add New Images :</label>
+                    <input type="file" name="image" id="image" class="form-control" multiple <%= camp.image.length === 0?'required': ''%>>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label> <br>
+                    <textarea type="text" name="description" placeholderdescription" id="description"
+                        class="form-control" required><%=camp.description%></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Campground Price:</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="price-label">$</span>
+                        <input type="text" class="form-control" placeholder="0.00" aria-label="price"
+                            aria-describedby="price-label" id="price" name="price" value="<%=camp.price%>" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-success" form="main-form">Update Campground</button>
+                    <a href="/campgrounds/<%=camp._id%>"><button type="button" class="btn btn-primary">Back To
+                            Campground</button></a>
+                </div>
+            </form>
+        </div>
+            <div class="<%=camp.image.length !== 0?'col-6':''%>">
+            <label for="" class="form-label">Images :</label><br>
+                    <%for(let img of camp.image){%>
+                    <div class="card mb-3 d-inline-block" style="width: 10rem;">
+                        <img src="<%=img.url%>" class="card-img-top img-thumbnail" style="height: 6rem;" alt="">
+                        <div class="card-body">
+                        <form action="/campgrounds/<%=camp._id%>/edit/<%=img._id%>?_method=PUT" method="post">
+                            <button class="btn btn-danger">Remove</button>
+                        </form>
+                        </div>
+                      </div>
+                    <%}%>
+            </div>
+        
+    </div>
