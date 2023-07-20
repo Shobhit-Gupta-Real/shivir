@@ -103,6 +103,7 @@ app.use((err, req, res, next)=>{
     if(!err.message) err.message = 'Something went wrong'
     res.status(statusCode).render('error', {err})
 })
-app.listen(1080, () => {
+const port = process.env.PORT || 1080
+app.listen(port, () => {
     console.log(`Server 1080 is ready!`)
 })
