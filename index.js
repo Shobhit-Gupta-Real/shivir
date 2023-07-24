@@ -25,7 +25,7 @@ const reviewRoutes = require('./routes/reviews')
 const {MongoStore} = require('connect-mongo')
 
 const mongodbstore = require('connect-mongo')(session)
-const dburl = 'mongodb+srv://shobhit0100:Ayjn0wBzKTOBHQ8H@cluster0.bohrsny.mongodb.net/?retryWrites=true&w=majority'
+const dburl = process.env.DB_URL
 
 // 'mongodb://127.0.0.1:27017/shivir'
 
