@@ -76,3 +76,4 @@ module.exports.remimg = async(req,res)=>{
     await camp.updateOne({$pull: {image: {_id: imgid}}}) //important line
     res.redirect(`/campgrounds/${id}/edit`)
 }
+

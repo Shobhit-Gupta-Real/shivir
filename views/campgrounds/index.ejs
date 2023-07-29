@@ -3,6 +3,7 @@
     <h1 id="head" class="offset-4 mb-3">Welcome Supreme User !!</h1>
 <%}%>
 <div id="cluster-map" class="shadow"></div>
+    
     <h1>List of all the Campgrounds</h1>
     <br>
     <%for(let camp of allCamps){%>
@@ -24,7 +25,7 @@
                                         <%=camp.location%>
                                     </small>
                                     <big>
-                                        $<%=camp.price%>
+                                        <%="\u20B9"%><%=camp.price%>
                                     </big>
                                 </p>
                                 <a href="/campgrounds/<%=camp._id%>" class="btn btn-primary">View</a>
