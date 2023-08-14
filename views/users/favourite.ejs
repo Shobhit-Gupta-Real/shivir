@@ -1,0 +1,40 @@
+<%layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/css/stars.css">
+<%for(let camp of data.favourite){%>
+    <div class="card mb-3" id="box">
+        <div class="row">
+            <div class="col-md-4">
+                    <img src="<%=camp.image[0].url%>" alt="" class="img-fluid img-thumbnail" id="img">
+            </div>
+            
+            <div class="col-mg-8 col-6">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%=camp.title%>
+                        <p class="starability-result" data-rating="<%= camp.rating%>">
+                            Rated: 3 stars
+                          </p>
+                        <div class="offset-1 mb-2 mt-2">
+                            <small class="card-text text-muted">
+                                <%=camp.description%>
+                            </small>
+                        </div>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <%=camp.location%>
+                                </small>
+                                <%="\u20B9"%>
+                                <big>
+                                    <%=camp.price%>
+                                </big>
+                            </p>
+                            <a href="/campgrounds/<%=camp._id%>" class="btn btn-primary">View</a>
+                            <form action="/favourite/<%=camp._id%>?_method=DELETE" method="post" class="d-inline">
+                                <button class="btn btn-danger">Reamove</button>
+                            </form>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%}%>

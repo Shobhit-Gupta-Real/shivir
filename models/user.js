@@ -8,7 +8,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
-    }
+    },
+    favourite:[{
+        type: mongoose.Schema.Types.ObjectId, ref:'campGround'
+    }],
+    owner: String
 })
   
 userSchema.plugin(passportLocalMongoose)

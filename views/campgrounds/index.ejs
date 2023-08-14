@@ -1,4 +1,5 @@
 <% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/stars.css">
 <%if(currentUser && currentUser.username === process.env.MASTER_USER){%>
     <h1 id="head" class="offset-4 mb-3">Welcome Supreme User !!</h1>
 <%}%>
@@ -17,6 +18,9 @@
                     <div class="card-body">
                         <h5 class="card-title">
                             <%=camp.title%>
+                            <p class="starability-result" data-rating="<%= camp.rating%>">
+                                Rated: 3 stars
+                              </p>
                             <div class="offset-1 mb-2 mt-2">
                                 <small class="card-text text-muted">
                                     <%=camp.description%>
@@ -32,6 +36,11 @@
                                     </big>
                                 </p>
                                 <a href="/campgrounds/<%=camp._id%>" class="btn btn-primary">View</a>
+                                <%if(currentUser){%>
+                                <form action="/<%=currentUser._id%>/favourite/<%=camp._id%>" method="post" class="d-inline">
+                                    <button class="btn btn-warning">Add To Favourite</button>
+                                </form>
+                                <%}%>
                         </h5>
                     </div>
                 </div>

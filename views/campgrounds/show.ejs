@@ -1,6 +1,5 @@
 <% layout('layouts/boilerplate') %>
 <link rel="stylesheet" href="/css/stars.css">
-
   <div class="row">
     <div class="col-6">
       <div id="carouselExample" class="carousel slide">
@@ -45,13 +44,19 @@
           </li>
         </ul>
         <%if(currentUser && camp.author.equals(currentUser._id)|| (currentUser && currentUser.username === process.env.MASTER_USER)){%>
-        <div class="card-body">
-          <a href="/campgrounds/<%=camp._id%>/edit" class="card-link"> <button class="btn btn-info">Edit</button></a>
-          <form class="d-inline" action="/campgrounds/<%=camp._id%>?_method=DELETE" method="post">
-            <button type="submit" class="btn btn-danger"> Delete</button>
+        <div id="edilete">
+          <a href="/campgrounds/<%=camp._id%>/edit" class="card-link"> <button class="btn btn-info" id="bt">Edit</button></a>
+         <!-- <button onclick="func()" class="btn btn-danger">Delete</button> -->
+          <form class="d-inline" action="/campgrounds/<%=camp._id%>?_method=DELETE" method="post" onsubmit="return submitForm(this);">
+            <input type="submit" class="btn btn-danger" id="bt" value="Delete"/>
           </form>
         </div>
         <%}%>
+        <%if(currentUser){%>
+        <form action="/<%=currentUser._id%>/favourite/<%=camp._id%>" method="post">
+          <button class="btn btn-warning" id="fbt">Add To Favourite</button>
+        </form>
+          <%}%>
       </div>
     </div>
     <div class="col-6">
@@ -104,7 +109,26 @@
             <% }%>
     </div>
   </div>
-  
+  <script>
+    function submitForm(form){
+      swal({
+  title: "Are you sure?",
+  text: "Once deleted, you won't be able to recover Campground!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((isOkay) => {
+  if (isOkay) {
+    form.submit();
+    swal("Poof! Your Campground has been deleted!", {
+      icon: "success",
+    });
+  }
+ });
+  return false;
+  }
+  </script>
   <script>
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>'
     const campground = <%-JSON.stringify(camp)%>

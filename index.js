@@ -23,12 +23,10 @@ const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
 const {MongoStore} = require('connect-mongo')
-
 const mongodbstore = require('connect-mongo')(session)
 const dburl = process.env.DB_URL
 
 // 'mongodb://127.0.0.1:27017/shivir'
-
 const passport = require('passport')
 const localStrategy = require('passport-local')
 const user = require('./models/user')

@@ -3,15 +3,26 @@ const router = express.Router()
 const User = require('../models/user')
 const catchAsync = require('../utils/catchAsync')
 const passport = require('passport')
-const { storeReturnTo } = require('../middleware');
+const { storeReturnTo, isLoggedIn } = require('../middleware');
 const users = require('../controller/users')
 
 router.get('/', (req,res)=>{
     res.render('home')
 })
+router.get('/interface',(req,res)=>{
+    res.render('users/interface')
+})
+router.get('/favourite',catchAsync(async(req,res)=>{
+    const user = req.user._id
+    const data = await User.findById(user).populate('favourite')
+    res.render('users/favourite',{data})
+}))
+router.post('/:userid/favourite/:campid', catchAsync(users.favourite))
+router.delete('/favourite/:campid', isLoggedIn, catchAsync(users.reamovefav))
 
 router.get('/register', (req,res)=>{
-    res.render('users/register')
+    const data = req.query.owner;
+    res.render('users/register', {data})
 })
 router.post('/register', catchAsync(users.add))
 

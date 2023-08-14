@@ -38,7 +38,8 @@ const campGroundSchema = new Schema({
     },
     reviews: [{
         type: mongoose.Schema.Types.ObjectId, ref:'review'
-    }]
+    }],
+    rating: Number
 }, opts)
 
 campGroundSchema.virtual('properties.popUpMarkup').get(function(){
