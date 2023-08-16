@@ -1,0 +1,102 @@
+@charset "utf-8";
+html {
+  font-size: 16px;
+}
+body {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.heart-like-button {
+  position: relative;
+  width: 30px;
+  height: 25px;
+}
+.heart-like-button:before {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+  width: 20px;
+  height: 35px;
+  border-radius: 13px 13px 0 0;
+  background-color: #acabaa;
+  content: "";
+  cursor: pointer;
+  transition: background .4s;
+}
+.heart-like-button:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin :100% 100%;
+  width: 20px;
+  height: 35px;
+  border-radius: 13px 13px 0 0;
+  background-color: #acabaa;
+  content: "";
+  cursor: pointer;
+  transition: background .4s;
+}
+
+.heart-like-button.liked::before,
+.heart-like-button.liked::after {
+  background-color: #d65076;
+}
+.heart-like-button.liked {
+  animation: liked .4s ease;
+}
+@keyframes liked {
+  0% {
+    transform: scale(.8);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@media screen and (max-width: 480px) {
+  #container {
+    height: auto;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+.heart-like-button-two {
+    position: relative;
+    width: 30px;
+    height: 25px;
+  }
+  .heart-like-button-two:before {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+    width: 20px;
+    height: 35px;
+    border-radius: 13px 13px 0 0;
+    background-color: #d65076;
+    content: "";
+    cursor: pointer;
+    transition: background .4s;
+  }
+  .heart-like-button-two:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin :100% 100%;
+    width: 20px;
+    height: 35px;
+    border-radius: 13px 13px 0 0;
+    background-color: #d65076;
+    content: "";
+    cursor: pointer;
+    transition: background .4s;
+  }
+  

@@ -33,6 +33,20 @@ nav.scrolled {
 #bt{
     width: 318px;
 }
-#fbt{
+#cbt{
     width: 100%
+}
+#containtitle{
+    display: flex;
+    justify-content: space-between;
+}
+#heart{
+    margin-bottom: 20px;
+    margin-right: 15px;
+    border: none;
+    background-color: white;
+}
+.controls{
+    display: flex; 
+    justify-content: space-between;
 }

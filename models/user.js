@@ -1,4 +1,4 @@
-const { string } = require('joi')
+const { string, number } = require('joi')
 const mongoose = require('mongoose')
 const passportLocalMongoose = require('passport-local-mongoose')
 
@@ -12,7 +12,11 @@ const userSchema = new mongoose.Schema({
     favourite:[{
         type: mongoose.Schema.Types.ObjectId, ref:'campGround'
     }],
-    owner: String
+    checklist:[{
+        type: mongoose.Schema.Types.ObjectId, ref:'campGround'
+    }],
+    owner: String,
+    payment: Number
 })
   
 userSchema.plugin(passportLocalMongoose)

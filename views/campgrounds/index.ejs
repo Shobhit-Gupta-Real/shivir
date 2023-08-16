@@ -17,19 +17,30 @@
                 <div class="col-mg-8 col-6">
                     <div class="card-body">
                         <h5 class="card-title">
+                            <div id="containtitle">
                             <%=camp.title%>
+                            <%if(currentUser){%>
+                                <form action="/<%=currentUser._id%>/favourite/<%=camp._id%>?q=0" method="post" class="d-inline">
+                                   <%if(currentUser.favourite.indexOf(camp._id) !== -1){%>
+                                      <button class="heart-like-button-two" id="heart"></button>
+                                   <%}else{%>
+                                      <button class="heart-like-button" id="heart"></button>
+                                   <%}%>
+                                </form>
+                                <%}%>
+                            </div>
                             <p class="starability-result" data-rating="<%= camp.rating%>">
                                 Rated: 3 stars
                               </p>
-                            <div class="offset-1 mb-2 mt-2">
-                                <small class="card-text text-muted">
+                            <div class="offset-1 mb-2">
+                                <small class="card-text">
                                     <%=camp.description%>
                                 </small>
                             </div>
                                 <p class="card-text">
-                                    <small class="text-muted">
+                                    <p class="text-muted d-inline">
                                         <%=camp.location%>
-                                    </small>
+                                    </p>
                                     <%="\u20B9"%>
                                     <big>
                                         <%=camp.price%>
@@ -37,8 +48,8 @@
                                 </p>
                                 <a href="/campgrounds/<%=camp._id%>" class="btn btn-primary">View</a>
                                 <%if(currentUser){%>
-                                <form action="/<%=currentUser._id%>/favourite/<%=camp._id%>" method="post" class="d-inline">
-                                    <button class="btn btn-warning">Add To Favourite</button>
+                                <form action="/<%=currentUser._id%>/checklist/<%=camp._id%>?q=0" method="post" class="d-inline">
+                                    <button class="btn btn-success">Add To Cart</button>
                                 </form>
                                 <%}%>
                         </h5>

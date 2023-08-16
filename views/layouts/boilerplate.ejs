@@ -9,6 +9,11 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
 <link rel="stylesheet" href="/css/app.css">
+
+<link rel="stylesheet" type="text/css" href="https://demo.plantpot.works/assets/css/normalize.css">
+<link rel="stylesheet" href="https://use.typekit.net/opg3wle.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+
 </head>
 <body class="d-flex flex-column vh-100">
     <%- include('../partials/navbar') %>
@@ -31,6 +36,18 @@
             }
            
         };
+    </script>
+
+    <script>
+        const button = document.querySelector(".heart-like-button");
+
+button.addEventListener("click", () => {
+  if (button.classList.contains("liked")) {
+    button.classList.remove("liked");
+  } else {
+    button.classList.add("liked");
+  }
+});
     </script>
     
 </body>

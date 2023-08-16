@@ -1,5 +1,10 @@
 <%layout('layouts/boilerplate')%>
 <link rel="stylesheet" href="/css/stars.css">
+<%if(!data.favourite.length){%>
+    <div class="offset-2">
+    <img src="https://cdn.dribbble.com/users/5550888/screenshots/12184508/no-files-found.png" alt="">
+</div>
+    <%}%>
 <%for(let camp of data.favourite){%>
     <div class="card mb-3" id="box">
         <div class="row">

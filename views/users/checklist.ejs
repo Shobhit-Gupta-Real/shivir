@@ -1,0 +1,38 @@
+<%layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/css/stars.css">
+<div class="row">
+  <div class="col-6">
+<%if(!data.checklist.length){%>
+    <img src="https://cdn.dribbble.com/users/5550888/screenshots/12184508/no-files-found.png" alt="">
+    <%}%>
+<%for(let camp of data.checklist){%>
+    <div class="card mb-3" style="width: 25rem;">
+        <img src="<%=camp.image[0].url%>" class="card-img-top" alt="">
+        <div class="card-body">
+          <h5 class="card-title d-inline"><%=camp.title%></h5><big> - <%="\u20B9"%><%=camp.price%></big>
+          <p class="starability-result" data-rating="<%= camp.rating%>">
+            Rated: 3 stars
+          </p>
+          <div class="controls">
+          <form action="/payment/<%=camp._id%>" method="post" class="d-flex">
+          <input type="number" class="form-control" name="beds" min="0" required autofocus>
+          <button class="btn btn-success" style="margin-left: 10px;">Add</button>
+        </form>
+          <form action="/checklist/<%=camp._id%>?_method=DELETE" method="post">
+            <button class="btn btn-danger" style="margin-left: 10px;">Reamove</a>
+          </form>
+        </div>
+        </div>
+      </div>
+<%}%>
+</div>
+<div class="col-6 mb-3">
+  <div class="card text-bg-secondary mb-3" style="max-width: 50rem;">
+    <h3 class="card-header">Payable Amount</h3>
+    <div class="card-body">
+      <h5 class="card-title">Sub-Total</h5>
+      <p class="card-text"><h1><%="\u20B9"%><%=data.payment%></h1></p>
+    </div>
+  </div>
+</div>
+</div>

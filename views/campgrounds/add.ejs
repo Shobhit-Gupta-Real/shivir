@@ -1,5 +1,5 @@
 <% layout('layouts/boilerplate') %>
-        <div class="card offset-3 mb-3 shadow p-2" style="height: 600px; width:650px;">
+        <div class="card offset-2 mb-3 shadow p-2" style="width:850px;">
         <h1 class="text-center">
             New Campground
         </h1>
@@ -25,6 +25,10 @@
                     <textarea type="text" name="description" placeholderdescription" id="description"
                         class="form-control" required></textarea>
                   
+                </div>
+                <div class="mb-3">
+                    <label for="available" class="form-label">Available Beds:</label> <br>
+                    <input type="number" name="available" id="available" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Campground Price:</label>

@@ -26,7 +26,8 @@ module.exports.campGroundSchema = joi.object({
     price: joi.number().required().min(0),
     //image: joi.string().required(),
     location: joi.string().required().escapeHTML(),
-    description: joi.string().required()
+    description: joi.string().required(),
+    available: joi.number()
 })
 module.exports.reviewSchema = joi.object({
     review: joi.object({
