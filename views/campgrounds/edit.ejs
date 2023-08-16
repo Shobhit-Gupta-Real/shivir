@@ -21,8 +21,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description:</label> <br>
-                    <textarea type="text" name="description" placeholderdescription" id="description"
+                    <textarea type="text" name="description" id="description"
                         class="form-control" required><%=camp.description%></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="available" class="form-label">Available Beds:</label> <br>
+                    <input type="number" name="available" id="available" class="form-control" value="<%=camp.available%>" required>
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Campground Price:</label>
