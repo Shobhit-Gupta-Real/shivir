@@ -1,7 +1,7 @@
 <%layout('layouts/boilerplate')%>
 <link rel="stylesheet" href="/css/stars.css">
 <div class="row">
-  <div class="col-6">
+  <div class="col-6" >
 <%if(!data.checklist.length){%>
     <img src="https://cdn.dribbble.com/users/5550888/screenshots/12184508/no-files-found.png" alt="">
     <%}%>
@@ -14,24 +14,40 @@
             Rated: 3 stars
           </p>
           <div class="controls">
-          <form action="/payment/<%=camp._id%>" method="post" class="d-flex">
-          <input type="number" class="form-control" name="beds" min="0" required autofocus>
-          <button class="btn btn-success" style="margin-left: 10px;">Add</button>
-        </form>
+          <form action="/paymentadd/<%=camp._id%>" method="post" class="d-flex">
+            <input type="number" class="form-control" name="beds" min="0" required autofocus>
+            <button class="btn btn-success" style="margin-left: 10px;">+</button>
+            <button class="btn btn-warning" style="margin-left: 5px;" formaction="/paymentrem/<%=camp._id%>">-</button>  
+          </form>
+            
+          </form>
           <form action="/checklist/<%=camp._id%>?_method=DELETE" method="post">
-            <button class="btn btn-danger" style="margin-left: 10px;">Reamove</a>
+            <button class="btn btn-danger" style="margin-left: 10px;">Remove</a>
           </form>
         </div>
         </div>
       </div>
 <%}%>
 </div>
-<div class="col-6 mb-3">
+<div class="col-6 mb-3 shadow" >
   <div class="card text-bg-secondary mb-3" style="max-width: 50rem;">
     <h3 class="card-header">Payable Amount</h3>
     <div class="card-body">
       <h5 class="card-title">Sub-Total</h5>
       <p class="card-text"><h1><%="\u20B9"%><%=data.payment%></h1></p>
+      <form action="/payment/ongoing" method="post">
+        <input type="hidden" name="amount" value="<%=parseInt(data.payment)*100%>">
+        <input type="hidden" name="productname" value="ShivirCamps">
+        <script
+        src="//checkout.stripe.com/v2/checkout.js"
+        class="stripe-button"
+        data-key="<%=key%>"
+        data-amount="<%=parseInt(data.payment)*100%>"
+        data-currency="inr"
+        data-name="ShivirCamps"
+        data-description="Payment Gateway"
+        data-locale="auto"></script>
+    </form>
     </div>
   </div>
 </div>

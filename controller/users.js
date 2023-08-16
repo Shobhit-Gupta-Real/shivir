@@ -45,11 +45,11 @@ module.exports.favourite = async(req,res)=>{
     else{res.redirect(`/campgrounds/${campid}`)} 
 }
 
-module.exports.reamovefav = async(req,res)=>{
+module.exports.removefav = async(req,res)=>{
     const userid = req.user._id
     const {campid} = req.params
     const user = await User.findByIdAndUpdate(userid, {$pull: {favourite: campid}})
-    req.flash('error','Reamoved From Favourites!')
+    req.flash('error','Removed From Favourites!')
     res.redirect('/favourite')
 }
 
@@ -76,10 +76,12 @@ module.exports.checklist = async(req,res)=>{
     else{res.redirect(`/campgrounds/${campid}`)} 
 }
 
-module.exports.reamovecheck = async(req,res)=>{
+module.exports.removecheck = async(req,res)=>{
     const userid = req.user._id
     const {campid} = req.params
     const user = await User.findByIdAndUpdate(userid, {$pull: {checklist: campid}})
-    req.flash('error','Reamoved From Checklist!')
+    user.payment = 0
+    user.save()
+    req.flash('error','Removed From Checklist!')
     res.redirect('/checklist')
 }

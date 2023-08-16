@@ -22,6 +22,7 @@ const mongoSanitize = require('express-mongo-sanitize')
 const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
+const paymentRoute = require('./routes/payments')
 const {MongoStore} = require('connect-mongo')
 const mongodbstore = require('connect-mongo')(session)
 const dburl = process.env.DB_URL
@@ -92,6 +93,7 @@ app.use((req,res,next)=>{
 app.use('/', userRoutes)
 app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
+app.use('/payment', paymentRoute)
 app.use(express.static(path.join(__dirname, 'public')))
 
 

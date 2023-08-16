@@ -6,6 +6,7 @@ const passport = require('passport')
 const { storeReturnTo, isLoggedIn } = require('../middleware');
 const users = require('../controller/users')
 const campground = require('../models/campground')
+const {STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY} = process.env
 
 router.get('/', (req,res)=>{
     res.render('home')
@@ -19,25 +20,36 @@ router.get('/favourite',catchAsync(async(req,res)=>{
     res.render('users/favourite',{data})
 }))
 router.post('/:userid/favourite/:campid', storeReturnTo, catchAsync(users.favourite))
-router.delete('/favourite/:campid', isLoggedIn, catchAsync(users.reamovefav))
+router.delete('/favourite/:campid', isLoggedIn, catchAsync(users.removefav))
 
 router.get('/checklist', catchAsync(async(req,res)=>{
     const user = req.user._id
     const data = await User.findById(user).populate('checklist')
-    res.render('users/checklist',{data})
+    res.render('users/checklist',{data, key: STRIPE_PUBLISHABLE_KEY})
 }))
 router.post('/:userid/checklist/:campid', storeReturnTo, catchAsync(users.checklist))
-router.delete('/checklist/:campid', isLoggedIn, catchAsync(users.reamovecheck))
+router.delete('/checklist/:campid', isLoggedIn, catchAsync(users.removecheck))
 
-router.post('/payment/:campid', catchAsync(async(req,res)=>{
+router.post('/paymentadd/:campid', catchAsync(async(req,res)=>{
     const {campid} = req.params
     const user = req.user._id
     const data = await User.findById(user)
     const camp = await campground.findById(campid)
-    data.payment = data.payment+(camp.price*req.body.beds)
+    data.payment = parseInt(data.payment+(camp.price*req.body.beds))
     data.save()
     res.redirect('/checklist')
 }))
+router.post('/paymentrem/:campid', catchAsync(async(req,res)=>{
+    const {campid} = req.params
+    const user = req.user._id
+    const data = await User.findById(user)
+    const camp = await campground.findById(campid)
+    data.payment = parseInt(data.payment-(camp.price*req.body.beds))
+    if(data.payment <= 0) data.payment = 0
+    data.save()
+    res.redirect('/checklist')
+}))
+
 
 router.get('/register', (req,res)=>{
     const data = req.query.owner;
